@@ -53,4 +53,18 @@ echo.
 echo ============================================
 echo  Done! Run 'make' to build your project.
 echo ============================================
+
+echo Running make...
+
+make
+if %errorlevel% neq 0 (
+    echo Build Failed!
+    pause
+    exit /b 1
+)
+
+echo Project built..
+echo Executing binary file..
+
+program.exe
 pause
