@@ -45,3 +45,4 @@ cd ..\..
 echo.
 echo Done! Run 'make' to build your project.
 pause
+exit /b 0
