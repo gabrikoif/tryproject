@@ -5,7 +5,7 @@
 int main()
 {
     int size = 5;
-    Node* list = create_list(size);
+    Node *list = create_list(size);
     int rows, cols;
     init(&rows, &cols);
 
@@ -16,7 +16,7 @@ int main()
     int count = list_size(list);
     int row = (rows - box_h * count) / 2;
     int col = (cols - box_w) / 2;
-    Node* pulledList = create_list(size);
+    Node *pulledList = create_list(0);
     draw_stack(row, col, box_h, box_w, list);
 
     int ch = 0;
@@ -34,12 +34,18 @@ int main()
         {
         case KEY_UP:
             int pulled;
-            pull(&list, &pulled);
+            if (pull(&list, &pulled))
+            {
+                break;
+            }
             push(&pulledList, pulled);
             break;
         case KEY_DOWN:
             int top;
-            pull(&pulledList, &top);
+            if (pull(&pulledList, &top))
+            {
+                break;
+            }
             push(&list, top);
             break;
         case KEY_RIGHT:
