@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <ncurses.h>
+#include "platform_utils.h"
 #include "stack.h"
 
 Node *create_list(int size)

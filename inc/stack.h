@@ -1,5 +1,4 @@
 #pragma once
-#define STACK_SIZE 5
 
 typedef struct Node
 {
