@@ -9,13 +9,17 @@ ncurses (new curses) is a programming library for creating textual user interfac
 ``` txt
 ncursesLearn
 ├── inc
-│   ├── platform_utils.h
-│   ├── terminal.h
-│   └── ui.h
+│   ├── platform_utils.h
+│   ├── stack.h
+│   ├── terminal.h
+│   └── ui.h
+├── install
+│   ├── install.bat
+│   └── install.sh
 ├── Makefile
 ├── README.md
 └── src
     ├── main.c
-    ├── terminal.c
-    └── ui.c
+    ├── stack.c
+    └── terminal.c
 ```
