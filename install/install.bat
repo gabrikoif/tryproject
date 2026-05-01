@@ -1,5 +1,4 @@
 @echo off
-
 :: Check for admin
 net session >nul 2>&1
 if %errorlevel% neq 0 (
@@ -24,6 +23,24 @@ echo Installing mingw, make, git...
 choco install mingw make git -y
 
 echo.
-echo Done! Please close this window, open a NEW terminal, and run 'make' to build your project.
+echo Please close this window and open a NEW terminal as Administrator, then press any key to continue...
 pause
-exit /b 0
+
+:: Clone PDCurses
+if exist PDCurses (
+    echo PDCurses folder already exists, skipping clone.
+) else (
+    echo Cloning PDCurses...
+    git clone https://github.com/Bill-Gray/PDCursesMod.git PDCurses
+)
+
+:: Build PDCurses
+echo Building PDCurses...
+cd PDCurses\wincon
+mingw32-make
+ar rcs libcurses.a *.o
+cd ..\..
+
+echo.
+echo Done! Run 'make' to build your project.
+pause
