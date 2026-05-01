@@ -1,5 +1,4 @@
 @echo off
-echo Installing dependencies...
 
 :: Check for admin
 net session >nul 2>&1
@@ -14,34 +13,16 @@ where choco >nul 2>&1
 if %errorlevel% neq 0 (
     echo Installing Chocolatey...
     powershell -Command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
+    echo.
+    echo Chocolatey installed. Please close this window, open a NEW terminal as Administrator, and run this script again.
+    pause
+    exit /b 0
 )
 
-:: Install gcc (MinGW) and make
-choco install mingw -y
-choco install make -y
-
-:: Refresh environment so gcc and make are available
-call refreshenv
-
-:: Clone and build PDCurses into project folder
-echo Cloning PDCursesMod...
-where git >nul 2>&1
-if %errorlevel% neq 0 (
-    choco install git -y
-    call refreshenv
-)
-
-if exist PDCurses (
-    echo PDCurses folder already exists, skipping clone.
-) else (
-    git clone https://github.com/Bill-Gray/PDCursesMod.git PDCurses
-)
-
-echo Building PDCurses (wincon)...
-cd PDCurses\wincon
-mingw32-make -f Makefile
-cd ..\..
+:: Install gcc (MinGW), make, and git
+echo Installing mingw, make, git...
+choco install mingw make git -y
 
 echo.
-echo Done! Run 'make' to build your project.
+echo Done! Please close this window, open a NEW terminal, and run 'make' to build your project.
 pause
