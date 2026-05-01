@@ -1,5 +1,7 @@
 build/
 program
+program.exe
 .cache/
 .vscode/
+PDCurses/
 compile_commands.json

@@ -8,7 +8,7 @@ TARGET = program
 
 ifeq ($(OS), Windows_NT)
     CFLAGS += -I./PDCurses
-    LIBS = -L./PDCurses/wincon -lcurses
+    LIBS = -L./PDCurses/wincon -lcurses -lwinmm
     TARGET := $(TARGET).exe
     MKDIR = mkdir $(BUILD_DIR)
 else

@@ -1,5 +1,4 @@
 #pragma once
-#define SIZE 5
 
 typedef struct Node
 {

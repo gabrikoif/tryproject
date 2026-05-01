@@ -2,8 +2,8 @@
 #pragma once
 
 #ifdef _WIN32
-    #include <windows.h>
     #include <curses.h>
+    #include <windows.h>
 #else
     #include <unistd.h>
     #include <ncurses.h>
