@@ -26,3 +26,4 @@ choco install mingw make git -y
 echo.
 echo Done! Please close this window, open a NEW terminal, and run 'make' to build your project.
 pause
+exit /b 0
