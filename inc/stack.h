@@ -1,4 +1,16 @@
 #pragma once
+#include <stdlib.h>
+#include <time.h>
+
+typedef enum {
+    MY_COLOR_RED,
+    MY_COLOR_GREEN,
+    MY_COLOR_BLUE,
+    MY_COLOR_YELLOW,
+    MY_COLOR_ORANGE,
+    MY_COLOR_PURPLE,
+    NUM_COLORS
+} Color;
 
 typedef struct Node
 {

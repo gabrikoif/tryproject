@@ -4,6 +4,7 @@
 
 int main()
 {
+    srand(time(NULL));
     int size = 5;
     Node *list = create_list(size);
     int rows, cols;

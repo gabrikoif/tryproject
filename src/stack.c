@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include <stdio.h>
 #include "platform_utils.h"
 #include "stack.h"
@@ -9,7 +8,7 @@ Node *create_list(int size)
     for (int i = 0; i < size; i++)
     {
         Node *new_node = malloc(sizeof(Node));
-        new_node->data = COLOR_RED + i;
+        new_node->data = (Color)(rand() % NUM_COLORS);
         new_node->next = head;
         head = new_node;
     }
