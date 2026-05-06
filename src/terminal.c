@@ -1,5 +1,4 @@
 #include "platform_utils.h"
-#include "ui.h"
 #include "terminal.h"
 
 void init(int *rows, int *cols)
@@ -34,4 +33,17 @@ void draw_stack(int start_row, int col, int box_height, int box_width, Node *hea
         i++;
     }
     refresh();
+}
+
+int shift_focus(int focus, int direction)
+{
+    // direction as a "boolean". right = 1. left = !right = 0.
+    int maxIndex = STACK_COUNT - 1; // indexing starts at 0.
+    if ((direction && focus == maxIndex) || (!direction && focus == 0))
+    {
+      return focus;
+    }
+    else if (direction) { focus++; }
+    else { focus--; }
+    return focus;
 }

@@ -17,6 +17,7 @@ int main()
     int count = list_size(list);
     int row = (rows - box_h * count) / 2;
     int col = (cols - box_w) / 2;
+    int focus = 0;
     Node *pulledList = create_list(0);
     draw_stack(row, col, box_h, box_w, list);
 
@@ -50,10 +51,10 @@ int main()
             push(&list, top);
             break;
         case KEY_RIGHT:
-            col += 2;
+            shift_focus(focus, 1);
             break;
         case KEY_LEFT:
-            col -= 2;
+            shift_focus(focus, 0);
             break;
         default:
             break;
