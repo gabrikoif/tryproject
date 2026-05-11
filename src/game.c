@@ -61,14 +61,35 @@ static void draw_all(int bottom_row, int start_col, Node **stacks,
 static void init_stacks(Node **stacks)
 {
     int num_color_stacks = NUM_STACKS - NUM_EMPTY;
+    int total = num_color_stacks * MAX_SIZE;
 
+    // Build flat array of all colors
+    int colors[total];
+    for (int i = 0; i < num_color_stacks; i++)
+        for (int j = 0; j < MAX_SIZE; j++)
+            colors[i * MAX_SIZE + j] = COLOR_RED + (i % 6); // Specific color at index i to i + MAX_SIZE - 1
+                                                            // eg: 0 -> MAX_SIZE - 1: RED
+
+    // Fisher-Yates shuffle
+    srand(time(NULL));
+    for (int i = total - 1; i > 0; i--)
+    {
+        int j = rand() % (i + 1);
+        int tmp = colors[i];
+        colors[i] = colors[j];
+        colors[j] = tmp;
+    }
+
+    // Deal into stacks
+    int idx = 0;
     for (int i = 0; i < num_color_stacks; i++)
     {
         stacks[i] = NULL;
         for (int j = 0; j < MAX_SIZE; j++)
-            push(&stacks[i], COLOR_RED + (i % 6));
+            push(&stacks[i], colors[idx++]);
     }
 
+    // Empty buffer stacks
     for (int i = num_color_stacks; i < NUM_STACKS; i++)
         stacks[i] = NULL;
 }
@@ -87,8 +108,9 @@ void run_game(int rows, int cols, GameConfig *config)
     int bottom_row = (rows / 2) + (BOX_H * MAX_SIZE) / 2 - BOX_H;
 
     int selected = 0;
-    int held = -1;
-    int source = -1;
+    int held = -1;   // What color is picked up. -1 means nothing.
+    int source = -1; // What stack the color was picked up from.
+    int move_counter = 0;
 
     draw_all(bottom_row, start_col, stacks, selected, held, rows);
 
@@ -125,6 +147,7 @@ void run_game(int rows, int cols, GameConfig *config)
                     source = -1;
                 }
             }
+            move_counter++;
             break;
 
         case 'c':
@@ -141,7 +164,7 @@ void run_game(int rows, int cols, GameConfig *config)
 
         if (check_win(stacks))
         {
-            mvprintw(rows / 2, cols / 2 - 4, "YOU WIN!");
+            mvprintw(rows / 2, cols / 2 - 4, "YOU WIN! Took you %d moves", move_counter);
             refresh();
             getch();
             break;

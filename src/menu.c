@@ -14,7 +14,9 @@ static const char *labels[] = {
     "Number of Stacks",
     "Stack Size",
     "Empty Stacks (Difficulty)",
-    "Start"};
+    "Start",
+    "NOTE: IF YOU PICK UP AND PRESS ENTER TO PUT DOWN IT COUNTS AS A MOVE. PRESS C TO CANCEL"
+};
 
 static void draw_menu(int rows, int cols, GameConfig *config,
                       int cursor, int editing)
