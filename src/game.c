@@ -143,11 +143,12 @@ void run_game(int rows, int cols, GameConfig *config)
                 if (list_size(stacks[selected]) < MAX_SIZE)
                 {
                     push(&stacks[selected], held);
+                    if (selected != source) { move_counter++; } 
+                    // Only if user pushed to other stack from which selected the move counter increments by 1.
                     held = -1;
                     source = -1;
                 }
             }
-            move_counter++;
             break;
 
         case 'c':
